@@ -95,6 +95,17 @@ public class Store {
         for (Product product : inventory) {
             System.out.println(product);
         }
+        System.out.println("Choose an option by entering one of the corresponding letters:");
+        System.out.println("A) Add a Product to Cart");
+        System.out.println("B) Go Back");
+        System.out.print("Enter Here: ");
+        String input = scanner.nextLine();
+
+
+        switch (input) {
+
+        }
+
         System.out.print("\nSelect Items to Add to Cart: ");
         String cartItem = scanner.nextLine();
 
