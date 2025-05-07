@@ -106,7 +106,6 @@ public class Store {
         }
 
     }
-}
 
     public static void displayCart(ArrayList<Product> cart, Scanner scanner, double totalAmount) {
         // This method should display the items in the cart ArrayList, along
@@ -114,10 +113,25 @@ public class Store {
         // prompt the user to remove items from their cart by entering the ID
         // of the product they want to remove. The method should update the cart ArrayList and totalAmount
         // variable accordingly.
-        
+        int cartCount = 0;
+        for (Product product : cart) {
+            System.out.println(product);
+            totalAmount += product.getPrice();
+            ++cartCount;
+        }
+
+        if (cartCount == 0) {
+            System.out.println("Your Cart is Empty");
+        }
+        System.out.println("Your Total Price is " + totalAmount);
+
+
 
 
     }
+}
+
+
 
 //    public static void checkOut(ArrayList<Product> cart, double totalAmount) {
 //        // This method should calculate the total cost of all items in the cart,
