@@ -86,25 +86,38 @@ public class Store {
     }
 
     public static void displayProducts(ArrayList<Product> inventory, ArrayList<Product> cart, Scanner scanner) {
-        // This method should display a list of products from the inventory,
-        // and prompt the user to add items to their cart. The method should
-        // prompt the user to enter the ID of the product they want to add to
-        // their cart. The method should
-        // add the selected product to the cart ArrayList.
-
+        /**
+         *  This Method display the Array List of Products from the CSV File
+         *  it does this by using a for each loop to print each product from the Inventory Array List.
+         *  Then it gets a user input for the item they would like to add to the cart based on the Item ID.
+         *  From there it adds that item to the User's Cart Array List
+         */
         for (Product product : inventory) {
             System.out.println(product);
         }
+        System.out.print("\nSelect Items to Add to Cart: ");
+        String cartItem = scanner.nextLine();
+
+        for (Product product: inventory) {
+            if (product.getId().equalsIgnoreCase(cartItem)) {
+                cart.add(product);
+                System.out.println("Added To Cart: " + product);
+            }
+        }
+
     }
 }
 
-//    public static void displayCart(ArrayList<Product> cart, Scanner scanner, double totalAmount) {
-//        // This method should display the items in the cart ArrayList, along
-//        // with the total cost of all items in the cart. The method should
-//        // prompt the user to remove items from their cart by entering the ID
-//        // of the product they want to remove. The method should update the cart ArrayList and totalAmount
-//        // variable accordingly.
-//    }
+    public static void displayCart(ArrayList<Product> cart, Scanner scanner, double totalAmount) {
+        // This method should display the items in the cart ArrayList, along
+        // with the total cost of all items in the cart. The method should
+        // prompt the user to remove items from their cart by entering the ID
+        // of the product they want to remove. The method should update the cart ArrayList and totalAmount
+        // variable accordingly.
+        
+
+
+    }
 
 //    public static void checkOut(ArrayList<Product> cart, double totalAmount) {
 //        // This method should calculate the total cost of all items in the cart,

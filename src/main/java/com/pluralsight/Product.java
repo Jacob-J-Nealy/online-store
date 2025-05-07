@@ -9,12 +9,14 @@ public class Product {
     private String description;
     private double price;
 
-    // Constructor
+    // Constructor (Inventory)
     public Product(String id, String description, double price) {
         this.id = id;
         this.description = description;
         this.price = price;
     }
+
+    //
 
     @Override
     public String toString() {
@@ -24,7 +26,7 @@ public class Product {
       productBuilder.append(description);
       productBuilder.append("|");
       productBuilder.append(price);
-      return String.format("%s |%s|%.2f|", id, description, price);
+      return String.format("%s |%s|%.2f", id, description, price);
     }
 
     // Getters & Setters
