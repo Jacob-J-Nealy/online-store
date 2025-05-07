@@ -1,18 +1,25 @@
 package com.pluralsight;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Store {
+    // Set CSV File to Read (change the file name if you want to use this app for a different list (Learned from Capstone 1)
+    // Initialized Array List for Inventory
+    // Initialized Array List for User's Cart
+    // Declared Variable for Total  Amount
+    private static final String FILE_NAME = "products.csv";
+    private static ArrayList<Product> inventory = new ArrayList<Product>();
+    private static ArrayList<Product> cart = new ArrayList<Product>();
+    private static double totalAmount = 0.0;
 
     public static void main(String[] args) {
-        // Initialize variables
-        ArrayList<Product> inventory = new ArrayList<Product>();
-        ArrayList<Product> cart = new ArrayList<Product>();
-        double totalAmount = 0.0;
 
-        // Load inventory from CSV file
-        loadInventory("products.csv", inventory);
+        //Loads Inventory from CSV file
+        System.out.println("Loading Application...\n");
+        loadInventory(FILE_NAME, inventory);
 
         // Create scanner to read user input
         Scanner scanner = new Scanner(System.in);
@@ -20,13 +27,23 @@ public class Store {
 
         // Display menu and get user choice until they choose to exit
         while (choice != 3) {
-            System.out.println("Welcome to the Online Store!");
+
+            // Online Store Home Screen Display
+            System.out.println("Welcome to the Online Store!\n");
+            System.out.println("Choose an Option Below!");
+            System.out.println("__________________________________________");
             System.out.println("1. Show Products");
             System.out.println("2. Show Cart");
-            System.out.println("3. Exit");
+            System.out.println("3. Exit\n");
+            System.out.print("Enter Number Here: ");
 
+            // User Selection
             choice = scanner.nextInt();
-            scanner.nextLine();
+            scanner.nextLine(); // scanner eater
+            System.out.println("__________________________________________");
+
+
+
 
             // Call the appropriate method based on user choice
             switch (choice) {
@@ -38,6 +55,7 @@ public class Store {
                     break;
                 case 3:
                     System.out.println("Thank you for shopping with us!");
+                    System.out.println("Closing Application...");
                     break;
                 default:
                     System.out.println("Invalid choice!");
@@ -55,6 +73,21 @@ public class Store {
         //
         // where id is a unique string identifier, name is the product name,
         // price is a double value representing the price of the product
+        String line;
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(FILE_NAME));
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] parts = line.split("\\|");
+                String id = parts[0];
+                String description = parts[1];
+                double price = Double.parseDouble(parts[2]);
+                inventory.add(new Product(id, description, price));
+            }
+            bufferedReader.close();
+
+        } catch (Exception e) {
+            System.err.println("Error; Couldn't Load Files...");
+        }
     }
 
     public static void displayProducts(ArrayList<Product> inventory, ArrayList<Product> cart, Scanner scanner) {
@@ -80,11 +113,10 @@ public class Store {
         // if they confirm.
     }
 
-    public static Product findProductById(String id, ArrayList<Product> inventory) {
+    // public static Product findProductById(String id, ArrayList<Product> inventory) {
         // This method should search the inventory ArrayList for a product with
         // the specified ID, and return the corresponding com.pluralsight.Product object. If
         // no product with the specified ID is found, the method should return
         // null.
     }
-}
 
