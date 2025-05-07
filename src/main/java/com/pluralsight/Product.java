@@ -19,7 +19,12 @@ public class Product {
     @Override
     public String toString() {
       StringBuilder productBuilder = new StringBuilder();
-
+      productBuilder.append(id);
+      productBuilder.append("|");
+      productBuilder.append(description);
+      productBuilder.append("|");
+      productBuilder.append(price);
+      return String.format("%s |%s|%.2f|", id, description, price);
     }
 
     // Getters & Setters

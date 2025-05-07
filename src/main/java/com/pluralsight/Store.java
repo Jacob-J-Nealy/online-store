@@ -43,8 +43,6 @@ public class Store {
             System.out.println("__________________________________________");
 
 
-
-
             // Call the appropriate method based on user choice
             switch (choice) {
                 case 1:
@@ -94,10 +92,11 @@ public class Store {
         // their cart. The method should
         // add the selected product to the cart ArrayList.
 
-        for (Product product : inventory);
-            System.out.println(inventory);
+        for (Product product : inventory) {
+            System.out.println(product);
         }
     }
+}
 
 //    public static void displayCart(ArrayList<Product> cart, Scanner scanner, double totalAmount) {
 //        // This method should display the items in the cart ArrayList, along
