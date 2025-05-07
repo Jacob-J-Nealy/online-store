@@ -65,14 +65,11 @@ public class Store {
     }
 
     public static void loadInventory(String fileName, ArrayList<Product> inventory) {
-        // This method should read a CSV file with product information and
-        // populate the inventory ArrayList with com.pluralsight.Product objects. Each line
-        // of the CSV file contains product information in the following format:
-        //
-        // id,name,price
-        //
-        // where id is a unique string identifier, name is the product name,
-        // price is a double value representing the price of the product
+        /**
+         * This Method is used to Load the Inventory from the CSV File.
+         * It also adds the Products from the CSV to an Array List by splitting the attributes of the products into
+         * different parts and setting those parts to the specific attributes.
+         */
         String line;
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(FILE_NAME));
