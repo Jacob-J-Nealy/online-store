@@ -14,6 +14,7 @@ public class Store {
     private static ArrayList<Product> inventory = new ArrayList<Product>();
     private static ArrayList<Product> cart = new ArrayList<Product>();
     private static double totalAmount = 0.0;
+    private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
 
@@ -21,8 +22,6 @@ public class Store {
         System.out.println("Loading Application...\n");
         loadInventory(FILE_NAME, inventory);
 
-        // Create scanner to read user input
-        Scanner scanner = new Scanner(System.in);
         int choice = -1;
 
         // Display menu and get user choice until they choose to exit
@@ -50,6 +49,7 @@ public class Store {
                     break;
                 case 2:
                     displayCart(cart, scanner, totalAmount);
+                    checkOut(cart, totalAmount);
                     break;
                 case 3:
                     System.out.println("Thank you for shopping with us!");
@@ -129,16 +129,44 @@ public class Store {
 
 
     }
+
+    public static void checkOut(ArrayList<Product> cart, double totalAmount) {
+        // This method should calculate the total cost of all items in the cart,
+        // and display a summary of the purchase to the user. The method should
+        // prompt the user to confirm the purchase, and calculate change and clear the cart
+        // if they confirm.
+        int cartCount = 0;
+        for (Product product : cart) {
+            totalAmount += product.getPrice();
+            ++cartCount;
+
+        }
+        System.out.println("Total Sale: " + totalAmount);
+
+        if (cartCount == 0) {
+            System.out.println("Your Cart is Empty");
+        }
+
+        System.out.print("Please Enter Cash Amount to Pay: ");
+        double cash = scanner.nextDouble();
+        scanner.nextLine(); // scanner eater
+        double change = cash - totalAmount;
+
+        if (change <= 0) {
+            System.err.println("Not Enough Money Sir");
+        } else {
+            System.out.println("Your Change Total: $" + change);
+        }
+
+
+
+    }
+
 }
 
 
 
-//    public static void checkOut(ArrayList<Product> cart, double totalAmount) {
-//        // This method should calculate the total cost of all items in the cart,
-//        // and display a summary of the purchase to the user. The method should
-//        // prompt the user to confirm the purchase, and calculate change and clear the cart
-//        // if they confirm.
-//    }
+
 
     // public static Product findProductById(String id, ArrayList<Product> inventory) {
         // This method should search the inventory ArrayList for a product with
