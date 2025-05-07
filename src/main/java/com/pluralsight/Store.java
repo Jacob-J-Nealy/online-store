@@ -49,7 +49,7 @@ public class Store {
                     displayProducts(inventory, cart, scanner);
                     break;
                 case 2:
-                    //displayCart(cart, scanner, totalAmount);
+                    displayCart(cart, scanner, totalAmount);
                     break;
                 case 3:
                     System.out.println("Thank you for shopping with us!");
