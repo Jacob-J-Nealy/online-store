@@ -93,6 +93,7 @@ public class Store {
     }
 
     public static void storeHomeScreenDisplay() {
+        System.out.println("__________________________________________");
         System.out.println("Welcome to the Online Store!");
         System.out.println("__________________________________________");
         System.out.println("Choose an Option Below:");
