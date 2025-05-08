@@ -185,10 +185,6 @@ public class Store {
     }
 
     public static void checkOut(ArrayList<Product> cart, double totalAmount) {
-        // This method should calculate the total cost of all items in the cart,
-        // and display a summary of the purchase to the user. The method should
-        // prompt the user to confirm the purchase, and calculate change and clear the cart
-        // if they confirm.
         int cartCount = 0;
         for (Product product : cart) {
             totalAmount += product.getPrice();
@@ -211,9 +207,9 @@ public class Store {
         } else {
             for (Product product : cart) {
                 System.out.println(product.getDescription() + " " + product.getPrice());
-                System.out.println("Your Change Total: $" + change);
-                cart.clear();
             }
+            System.out.println("Your Change Total: $" + change);
+            cart.clear();
 
 
         }
