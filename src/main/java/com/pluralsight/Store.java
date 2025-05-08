@@ -24,7 +24,6 @@ public class Store {
         loadInventory(FILE_NAME, inventory);
 
 
-
         // While Loop to Keep Home Screen Open till user enters 3 to Exit the Application
         int homeScreenInput = 0;
         while (homeScreenInput != 3) {
@@ -43,16 +42,23 @@ public class Store {
                     break;
                 case 2:
                     displayCart(cart, scanner, totalAmount);
-                    String displayCartInput = "";
                     System.out.println("Choose an Option Below:");
                     System.out.println("C) Check Out Cart & Pay");
-                    
+                    System.out.println("B) Go Back to Home Screen");
+                    System.out.print("\nEnter Letter Here: ");
+                    String displayCartInput = scanner.nextLine();
+                    System.out.println("_________________________________________");
 
-                    switch (displayCartInput.toUpperCase()) {
-                        case "C":
+                    if (displayCartInput.equalsIgnoreCase("C")) {
+                        switch (displayCartInput.toUpperCase()) {
+                            case "C":
+                                checkOut(cart, totalAmount);
+                                break;
+                            case "B":
+                                System.out.println("Going to Home Screen...\n");
+                                continue;
+                        }
                     }
-                    checkOut(cart, totalAmount);
-                    break;
                 case 3:
                     exitApplication();
                     break;
@@ -156,7 +162,6 @@ public class Store {
         }
 
 
-
     }
 
     public static void displayCart(ArrayList<Product> cart, Scanner scanner, double totalAmount) {
@@ -173,9 +178,10 @@ public class Store {
         }
 
         if (cartCount == 0) {
-            System.out.println("Your Cart is Empty");
+            System.out.println("Your Cart is Empty\n");
+            int homeScreenInput = 3;
         }
-        System.out.println("\nYour Total Price is " + totalAmount);
+        System.out.println("\nYour Total Price is $" + totalAmount + "\n");
     }
 
     public static void checkOut(ArrayList<Product> cart, double totalAmount) {
@@ -201,18 +207,21 @@ public class Store {
         double change = cash - totalAmount;
 
         if (change <= 0) {
-            System.err.println("Not Enough Money Sir");
+            System.err.println("Not Enough Money! Returning to Home Screen...");
         } else {
-            System.out.println("Your Change Total: $" + change);
+            for (Product product : cart) {
+                System.out.println(product.getDescription() + " " + product.getPrice());
+                System.out.println("Your Change Total: $" + change);
+                cart.clear();
+            }
+
+
         }
-
-
 
     }
 
     public static void exitApplication() {
         System.out.println("Thank you for shopping with us!");
-        System.out.println("Closing Application...");
     }
 
     public static Product findProductById(String id, ArrayList<Product> inventory) {
@@ -227,12 +236,6 @@ public class Store {
         }
         return null;
 
+
     }
-
 }
-
-
-
-
-
-
