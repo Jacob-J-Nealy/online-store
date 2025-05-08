@@ -23,21 +23,16 @@ public class Store {
         System.out.println("Loading Application...\n");
         loadInventory(FILE_NAME, inventory);
 
-        int homeScreenInput = 0;
+
 
         // While Loop to Keep Home Screen Open till user enters 3 to Exit the Application
+        int homeScreenInput = 0;
         while (homeScreenInput != 3) {
 
             // Online Store Home Screen Display
-            System.out.println("Welcome to the Online Store!");
-            System.out.println("__________________________________________");
-            System.out.println("Choose an Option Below:");
-            System.out.println("1. Show Products List");
-            System.out.println("2. Show Cart & Check Out");
-            System.out.println("3. Exit Online Store\n");
-            System.out.print("Enter Number Here: ");
+            storeHomeScreenDisplay();
 
-            // User Selection
+            // Home Screen User Selection
             homeScreenInput = scanner.nextInt();
             scanner.nextLine(); // scanner eater
             System.out.println("__________________________________________");
@@ -51,8 +46,7 @@ public class Store {
                     checkOut(cart, totalAmount);
                     break;
                 case 3:
-                    System.out.println("Thank you for shopping with us!");
-                    System.out.println("Closing Application...");
+                    exitApplication();
                     break;
                 default:
                     System.out.println("Invalid Option\n");
@@ -82,6 +76,16 @@ public class Store {
         } catch (Exception e) {
             System.err.println("Error; Couldn't Load Files...");
         }
+    }
+
+    public static void storeHomeScreenDisplay() {
+        System.out.println("Welcome to the Online Store!");
+        System.out.println("__________________________________________");
+        System.out.println("Choose an Option Below:");
+        System.out.println("1. Show Products List");
+        System.out.println("2. Show Cart & Check Out");
+        System.out.println("3. Exit Online Store\n");
+        System.out.print("Enter Number Here: ");
     }
 
     public static void displayProducts(ArrayList<Product> inventory, ArrayList<Product> cart, Scanner scanner) {
@@ -164,6 +168,11 @@ public class Store {
 
 
 
+    }
+
+    public static void exitApplication() {
+        System.out.println("Thank you for shopping with us!");
+        System.out.println("Closing Application...");
     }
 
     public static void checkOut(ArrayList<Product> cart, double totalAmount) {
