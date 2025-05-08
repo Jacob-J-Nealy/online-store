@@ -10,6 +10,7 @@ public class Store {
     // Initialized Array List for Inventory
     // Initialized Array List for User's Cart
     // Declared Variable for Total  Amount
+    // Made a New Scanner for User Entry
     private static final String FILE_NAME = "products.csv";
     private static ArrayList<Product> inventory = new ArrayList<Product>();
     private static ArrayList<Product> cart = new ArrayList<Product>();
@@ -22,24 +23,26 @@ public class Store {
         System.out.println("Loading Application...\n");
         loadInventory(FILE_NAME, inventory);
 
-        int choice = 0;
-        while (choice != 3) {
+        int homeScreenInput = 0;
+
+        // While Loop to Keep Home Screen Open till user enters 3 to Exit the Application
+        while (homeScreenInput != 3) {
 
             // Online Store Home Screen Display
-            System.out.println("Welcome to the Online Store!\n");
-            System.out.println("Choose an Option Below!");
+            System.out.println("Welcome to the Online Store!");
             System.out.println("__________________________________________");
-            System.out.println("1. Show Products");
+            System.out.println("Choose an Option Below:");
+            System.out.println("1. Show Products List");
             System.out.println("2. Show Cart & Check Out");
             System.out.println("3. Exit Online Store\n");
             System.out.print("Enter Number Here: ");
 
             // User Selection
-            choice = scanner.nextInt();
+            homeScreenInput = scanner.nextInt();
             scanner.nextLine(); // scanner eater
             System.out.println("__________________________________________");
 
-            switch (choice) {
+            switch (homeScreenInput) {
                 case 1:
                     displayProducts(inventory, cart, scanner);
                     break;
@@ -57,7 +60,6 @@ public class Store {
             }
         }
     }
-
 
     public static void loadInventory(String fileName, ArrayList<Product> inventory) {
         /**
@@ -101,13 +103,13 @@ public class Store {
         System.out.print("Enter Here: ");
         String input = scanner.nextLine();
 
-        boolean wantsAnotherItem;
-        while (wantsAnotherItem = true) {
+        boolean wantsAnotherItem = true;
+
+        while (wantsAnotherItem) {
             switch (input.toUpperCase()) {
                 case "A":
                     System.out.print("\nSelect Items to Add to Cart By Enter appropriate Item ID: ");
                     String cartItem = scanner.nextLine();
-
                     for (Product product : inventory) {
                         if (product.getId().equalsIgnoreCase(cartItem)) {
                             cart.add(product);
@@ -115,17 +117,25 @@ public class Store {
                         }
                     }
                     System.out.print("Would you like to add another item to cart? (Y/N): ");
-                    String input = scanner.nextLine();
-                    if (input.toUpperCase() == "Y") {
-                        System.out.println("Returning to Product List");
+                    String addItemInput = scanner.nextLine();
+                    switch (addItemInput.toUpperCase()) {
+                        case "Y":
+                            wantsAnotherItem = true;
+                            continue;
+                        case "N":
+                            wantsAnotherItem = false;
+                            break;
                     }
-
                     break;
+
                 case "B":
                     System.out.println("Going Back to Home Screen...\n");
-                    break;
+                    wantsAnotherItem = false;
+                    continue;
+
                 default:
                     System.out.println("Invalid Option");
+                    wantsAnotherItem = false;
             }
         }
 
