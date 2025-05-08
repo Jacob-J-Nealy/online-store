@@ -112,14 +112,17 @@ public class Store {
         while (wantsAnotherItem) {
             switch (input.toUpperCase()) {
                 case "A":
-                    System.out.print("\nSelect Items to Add to Cart By Enter appropriate Item ID: ");
+                    System.out.print("\nSelect Items to Add to Cart By Entering appropriate Item ID: ");
                     String cartItem = scanner.nextLine();
-                    for (Product product : inventory) {
-                        if (product.getId().equalsIgnoreCase(cartItem)) {
-                            cart.add(product);
-                            System.out.println("Added To Cart: " + product.getDescription() + "\n");
-                        }
+                    Product product = findProductById(cartItem, inventory);
+
+                    if (product != null) {
+                        cart.add(product);
+                        System.out.println("Added To Cart: " + product.getDescription() + "\n");
+                    } else {
+                        System.err.print("\nItem does not exist. Would you like to try to add Item to Cart again? (Y/N):  ");
                     }
+
                     System.out.print("Would you like to add another item to cart? (Y/N): ");
                     String addItemInput = scanner.nextLine();
                     switch (addItemInput.toUpperCase()) {
@@ -128,6 +131,7 @@ public class Store {
                             continue;
                         case "N":
                             wantsAnotherItem = false;
+                            System.out.println("Going Back to Home Screen...\n");
                             break;
                     }
                     break;
@@ -155,7 +159,7 @@ public class Store {
          */
         int cartCount = 0;
         for (Product product : cart) {
-            System.out.println(product);
+            System.out.println(product.getDescription() + " " + product.getPrice());
             totalAmount += product.getPrice();
             ++cartCount;
         }
@@ -163,16 +167,7 @@ public class Store {
         if (cartCount == 0) {
             System.out.println("Your Cart is Empty");
         }
-        System.out.println("Your Total Price is " + totalAmount);
-
-
-
-
-    }
-
-    public static void exitApplication() {
-        System.out.println("Thank you for shopping with us!");
-        System.out.println("Closing Application...");
+        System.out.println("\nYour Total Price is " + totalAmount);
     }
 
     public static void checkOut(ArrayList<Product> cart, double totalAmount) {
@@ -207,15 +202,29 @@ public class Store {
 
     }
 
+    public static void exitApplication() {
+        System.out.println("Thank you for shopping with us!");
+        System.out.println("Closing Application...");
+    }
+
+    public static Product findProductById(String id, ArrayList<Product> inventory) {
+        /**
+         * This Method searches the Inventory Array List for a Product based on the User Entered ID
+         * and returns the Product back to the  Main Method
+         */
+        for (Product product : inventory) {
+            if (product.getId().equalsIgnoreCase(id)) {
+                return product;
+            }
+        }
+        return null;
+
+    }
+
 }
 
 
 
 
 
-    // public static Product findProductById(String id, ArrayList<Product> inventory) {
-        // This method should search the inventory ArrayList for a product with
-        // the specified ID, and return the corresponding com.pluralsight.Product object. If
-        // no product with the specified ID is found, the method should return
-        // null.
 
