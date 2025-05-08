@@ -43,6 +43,14 @@ public class Store {
                     break;
                 case 2:
                     displayCart(cart, scanner, totalAmount);
+                    String displayCartInput = "";
+                    System.out.println("Choose an Option Below:");
+                    System.out.println("C) Check Out Cart & Pay");
+                    
+
+                    switch (displayCartInput.toUpperCase()) {
+                        case "C":
+                    }
                     checkOut(cart, totalAmount);
                     break;
                 case 3:
