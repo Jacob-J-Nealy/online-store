@@ -22,9 +22,7 @@ public class Store {
         System.out.println("Loading Application...\n");
         loadInventory(FILE_NAME, inventory);
 
-        int choice = -1;
-
-        // Display menu and get user choice until they choose to exit
+        int choice = 0;
         while (choice != 3) {
 
             // Online Store Home Screen Display
@@ -32,8 +30,8 @@ public class Store {
             System.out.println("Choose an Option Below!");
             System.out.println("__________________________________________");
             System.out.println("1. Show Products");
-            System.out.println("2. Show Cart");
-            System.out.println("3. Exit\n");
+            System.out.println("2. Show Cart & Check Out");
+            System.out.println("3. Exit Online Store\n");
             System.out.print("Enter Number Here: ");
 
             // User Selection
@@ -41,8 +39,6 @@ public class Store {
             scanner.nextLine(); // scanner eater
             System.out.println("__________________________________________");
 
-
-            // Call the appropriate method based on user choice
             switch (choice) {
                 case 1:
                     displayProducts(inventory, cart, scanner);
@@ -56,11 +52,12 @@ public class Store {
                     System.out.println("Closing Application...");
                     break;
                 default:
-                    System.out.println("Invalid choice!");
+                    System.out.println("Invalid Option\n");
                     break;
             }
         }
     }
+
 
     public static void loadInventory(String fileName, ArrayList<Product> inventory) {
         /**
@@ -92,29 +89,47 @@ public class Store {
          *  Then it gets a user input for the item they would like to add to the cart based on the Item ID.
          *  From there it adds that item to the User's Cart Array List
          */
+        System.out.println("PRODUCT LIST & PRICES");
+        System.out.println("____________________________________");
         for (Product product : inventory) {
             System.out.println(product);
         }
-        System.out.println("Choose an option by entering one of the corresponding letters:");
+        System.out.println("_____________________________________");
+        System.out.println("\nChoose an option by entering one of the corresponding letters:");
         System.out.println("A) Add a Product to Cart");
         System.out.println("B) Go Back");
         System.out.print("Enter Here: ");
         String input = scanner.nextLine();
 
+        boolean wantsAnotherItem;
+        while (wantsAnotherItem = true) {
+            switch (input.toUpperCase()) {
+                case "A":
+                    System.out.print("\nSelect Items to Add to Cart By Enter appropriate Item ID: ");
+                    String cartItem = scanner.nextLine();
 
-        switch (input) {
+                    for (Product product : inventory) {
+                        if (product.getId().equalsIgnoreCase(cartItem)) {
+                            cart.add(product);
+                            System.out.println("Added To Cart: " + product.getDescription() + "\n");
+                        }
+                    }
+                    System.out.print("Would you like to add another item to cart? (Y/N): ");
+                    String input = scanner.nextLine();
+                    if (input.toUpperCase() == "Y") {
+                        System.out.println("Returning to Product List");
+                    }
 
-        }
-
-        System.out.print("\nSelect Items to Add to Cart: ");
-        String cartItem = scanner.nextLine();
-
-        for (Product product: inventory) {
-            if (product.getId().equalsIgnoreCase(cartItem)) {
-                cart.add(product);
-                System.out.println("Added To Cart: " + product);
+                    break;
+                case "B":
+                    System.out.println("Going Back to Home Screen...\n");
+                    break;
+                default:
+                    System.out.println("Invalid Option");
             }
         }
+
+
 
     }
 
